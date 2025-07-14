@@ -23,7 +23,7 @@ def create_note(
 ):
     note_id = note_service.create_note(note_data, user)
     log_action(user.username, user.role, "create_note", note_id)
-
+    return {"detail": "Note created"}
 
 @note_router.get("/", response_model=list[NoteModel])
 def get_my_notes(
@@ -97,8 +97,5 @@ def restore_note(
     note_service: NoteService = Depends(),
     user: BaseUser = Depends(require_permission(Permission.RESTORE_NOTE)),
 ):
-    success = note_service.restore_note(note_id)
-    if not success:
-        raise HTTPException(status_code=404, detail="Note not found or not deleted")
-    log_action(user.username, user.role, "restore_note", note_id)
+    note_service.restore_note(note_id)
     return {"detail": "Note restored"}

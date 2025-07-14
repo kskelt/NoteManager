@@ -74,9 +74,8 @@ class NoteService:
             )
         return True
 
-    def restore_note(self, note_id: str, user: BaseUser) -> bool:
-        user_id = self._get_user_id(user.username)
-        if not self._note_repo.restore_note(note_id, user_id):
+    def restore_note(self, note_id: str) -> bool:
+        if not self._note_repo.restore_note(note_id):
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail="Note not found or not allowed"

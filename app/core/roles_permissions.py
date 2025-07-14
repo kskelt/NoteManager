@@ -13,6 +13,10 @@ ROLE_PERMISSIONS = {
         Permission.DELETE_NOTE,
     },
     "admin": {
+        Permission.CREATE_NOTE,
+        Permission.READ_OWN_NOTE,
+        Permission.UPDATE_OWN_NOTE,
+        Permission.DELETE_NOTE,
         Permission.READ_ALL_NOTES,
         Permission.READ_USER_NOTES,
         Permission.RESTORE_NOTE,
