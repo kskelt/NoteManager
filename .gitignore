@@ -13,7 +13,6 @@ poetry.lock
 .pypoetry/
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
