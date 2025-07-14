@@ -1,10 +1,10 @@
-from typing import Optional, List
+
 from fastapi import Depends
 from pymongo.collection import Collection
 from bson import ObjectId
 from datetime import datetime, timezone
 from pymongo.database import Database
-from app.database import get_db
+from app.core.database import get_db
 
 
 class NoteRepository:
@@ -20,8 +20,7 @@ class NoteRepository:
         result = self.collection.insert_one(note_data)
         return result.inserted_id
 
-    def get_note_by_id(self, note_id: str, user_id: str, 
-                      is_admin: bool = False) -> dict | None:
+    def get_note_by_id(self, note_id: str, user_id: str, is_admin: bool = False) -> dict | None:
         query = {"_id": ObjectId(note_id)}
         if not is_admin:
             query["user_id"] = ObjectId(user_id)
@@ -60,12 +59,12 @@ class NoteRepository:
         )
         return result.modified_count > 0
 
-    def get_user_notes(self, user_id: str, is_admin: bool = False) -> List[dict]:
+    def get_user_notes(self, user_id: str, is_admin: bool = False) -> list[dict]:
         query = {}
         if not is_admin:
             query["user_id"] = ObjectId(user_id)
             query["deleted"] = False
         return list(self.collection.find(query))
 
-    def get_all_notes(self) -> List[dict]:
+    def get_all_notes(self) -> list[dict]:
         return list(self.collection.find())

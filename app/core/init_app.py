@@ -8,7 +8,7 @@ from app.routes.auth import auth_router
 from app.routes.notes import note_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.docs import get_swagger_ui_html
-from app.database import get_db, get_db_instance
+from app.core.database import get_db, get_db_instance
 
 settings = get_settings()
 
@@ -33,19 +33,6 @@ def init_app():
     app.include_router(note_router)
 
     return app
-
-
-def append_swagger(app: FastAPI):
-    """Enabling swagger, redoc and json api doc"""
-
-    @app.get("/docs", include_in_schema=False)
-    def get_swagger():
-        return get_swagger_ui_html(
-            openapi_url="/openapi.json",
-            title=settings.app_name,
-            swagger_js_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui-bundle.js",
-            swagger_css_url="https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui.css",
-        )
 
 
 def lifespan(app: FastAPI):

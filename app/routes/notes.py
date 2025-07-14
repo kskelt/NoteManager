@@ -4,7 +4,7 @@ from typing import List
 from app.models.notes import NoteCreate, NoteModel
 from app.services.notes import NoteService
 from app.utils.logger import log_action
-from app.models.users import BaseUser, User
+from app.models.users import BaseUser
 from app.core.roles_permissions import Permission, require_permission
 
 note_router = APIRouter(prefix="/notes", tags=["notes"])

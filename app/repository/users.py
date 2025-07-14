@@ -1,7 +1,7 @@
 from fastapi import Depends
 from pymongo.database import Database
 
-from app.database import get_db
+from app.core.database import get_db
 from pymongo.collection import Collection
 
 

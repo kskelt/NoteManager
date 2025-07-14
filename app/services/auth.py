@@ -1,4 +1,3 @@
-# app/modules/auth/service.py
 from fastapi.security import OAuth2PasswordRequestForm
 from fastapi import Depends, HTTPException
 from typing import Tuple
